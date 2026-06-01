@@ -3,6 +3,8 @@ from .models import Guestbook, Comment, GuestbookLike, CommentLike
 
 class GuestbookSerializer(serializers.ModelSerializer):
 
+  likes_count = serializers.IntegerField(source='likes.count', read_only=True)  # 좋아요 수를 계산하여 반환하는 필드
+
   class Meta:
     model = Guestbook    # serializer가 어떤 모델을 기반으로 만들어지는지 >> guestbook
     fields = '__all__'
@@ -24,6 +26,8 @@ class GuestbookSerializer(serializers.ModelSerializer):
       return value
   
 class CommentSerializer(serializers.ModelSerializer):
+    likes_count = serializers.IntegerField(source='likes.count', read_only=True)  # 좋아요 수를 계산하여 반환하는 필드
+
     class Meta:
         model = Comment
         fields = '__all__'
