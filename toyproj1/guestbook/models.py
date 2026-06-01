@@ -33,6 +33,9 @@ class Comment(BaseModel): # BaseModel을 상속받음 -> 작성 시간, 수정 �
 
     def __str__(self):
         return f"{self.post.title}의 댓글: {self.content}"
+
+    def like_count(self):
+        return self.likes.count()
     
 class GuestbookLike(models.Model):
     guestbook = models.ForeignKey(Guestbook, on_delete=models.CASCADE, related_name='likes')
